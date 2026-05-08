@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApeKade Online Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <p>Useful Products. Easy Orders. Islandwide Delivery.</p>
+    <div>
+      <a href="https://www.facebook.com/onlineapekade" target="_blank">Facebook</a>
+      <a href="https://wa.me/94710921311" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="logo-box">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihyphenhyphenvfjtOhZduY2DoBB70YS5QpGPCPxtDj83sBNWVq5yJATvHERIZ-gOg70o9iMkMsroGHch3kYrayVOs0VA0vU8rToQceLOjX0H8Guj49cTe2R_latyOFDoLt6v6llZ_p6h8zlW-ANok7V__ClwhmB4LCAtW3comq4TmdJZA09G3JUtdOYgM15F2hsUiU/s320/536283650_1102068118694080_5990569046468868467_n.jpg" alt="ApeKade Logo">
+      <div>
+        <h1>ApeKade</h1>
+        <span>Online Store</span>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search LED lights, bottles, toys, beauty items..." />
+      <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <button class="cart-btn" onclick="openCart()">
+      Cart <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <a href="#home">Home</a>
+
+    <div class="dropdown">
+      <button>Shop ▼</button>
+      <div class="dropdown-menu">
+        <a href="#products" onclick="filterProducts('all')">Shop All</a>
+        <a href="#products" onclick="filterProducts('Lighting & Decor')">Lighting & Decor</a>
+        <a href="#products" onclick="filterProducts('Bottles & Drinkware')">Bottles & Drinkware</a>
+        <a href="#products" onclick="filterProducts('Home Essentials')">Home Essentials</a>
+        <a href="#products" onclick="filterProducts('Kitchen Tools')">Kitchen Tools</a>
+        <a href="#products" onclick="filterProducts('Toys & Kids')">Toys & Kids</a>
+        <a href="#products" onclick="filterProducts('Beauty Care')">Beauty Care</a>
+        <a href="#products" onclick="filterProducts('Smart Gadgets')">Smart Gadgets</a>
+        <a href="#products" onclick="filterProducts('Special Offers')">Special Offers</a>
+      </div>
+    </div>
+
+    <a href="#about">About Us</a>
+    <a href="#return">Return Policy</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="small-title">ApeKade Online Shopping Sri Lanka</p>
+      <h2>Shop Smart Daily Essentials</h2>
+      <p>
+        Discover LED lights, water bottles, home improvement items, toys,
+        beauty care products and smart lifestyle essentials with easy WhatsApp ordering.
+      </p>
+      <div class="hero-buttons">
+        <a href="#products">Shop Now</a>
+        <a class="whatsapp-btn" href="https://wa.me/94710921311" target="_blank">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Popular Categories</h2>
+      <p>Choose your favorite product category</p>
+    </div>
+
+    <div class="category-grid">
+      <button onclick="filterProducts('Lighting & Decor')">Lighting & Decor</button>
+      <button onclick="filterProducts('Bottles & Drinkware')">Bottles & Drinkware</button>
+      <button onclick="filterProducts('Home Essentials')">Home Essentials</button>
+      <button onclick="filterProducts('Kitchen Tools')">Kitchen Tools</button>
+      <button onclick="filterProducts('Toys & Kids')">Toys & Kids</button>
+      <button onclick="filterProducts('Beauty Care')">Beauty Care</button>
+      <button onclick="filterProducts('Smart Gadgets')">Smart Gadgets</button>
+      <button onclick="filterProducts('Special Offers')">Special Offers</button>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section" id="products">
+    <div class="section-title">
+      <h2 id="productTitle">Shop All Products</h2>
+      <p>COD available | Free delivery for selected products</p>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </section>
+
+  <!-- About -->
+  <section class="info-section" id="about">
+    <h2>About Us</h2>
+    <p>
+      ApeKade is an online shopping store created to bring useful and trending products
+      to customers in Sri Lanka. We offer LED lights, drinkware, home essentials,
+      kitchen tools, toys, beauty care items, smart gadgets and special offers.
+    </p>
+    <p>
+      Our goal is to make shopping simple, safe and convenient. Customers can browse
+      products, add items to cart and place orders easily through WhatsApp.
+    </p>
+  </section>
+
+  <!-- Return Policy -->
+  <section class="info-section" id="return">
+    <h2>Return Policy</h2>
+    <p>
+      We accept return requests only for damaged, wrong or defective products.
+      Customers must inform us within 24 hours after receiving the product.
+    </p>
+    <p>
+      To request a return, customers should send clear photos or videos of the product
+      issue through WhatsApp. Products must be unused, in original condition and with
+      original packaging.
+    </p>
+  </section>
+
+  <!-- Checkout -->
+  <section class="checkout-section" id="checkout">
+    <h2>Checkout</h2>
+    <p>Fill your details and send your order directly to WhatsApp.</p>
+
+    <input type="text" id="customerName" placeholder="Your Name">
+    <input type="text" id="customerPhone" placeholder="Phone Number">
+    <textarea id="customerAddress" placeholder="Delivery Address"></textarea>
+
+    <button onclick="sendOrderToWhatsApp()">Send Order to WhatsApp</button>
+  </section>
+
+  <!-- Contact -->
+  <section class="info-section" id="contact">
+    <h2>Contact</h2>
+    <p><strong>WhatsApp:</strong> <a href="https://wa.me/94710921311" target="_blank">+94 710921311</a></p>
+    <p><strong>Facebook:</strong> <a href="https://www.facebook.com/onlineapekade" target="_blank">ApeKade Facebook Page</a></p>
+  </section>
+
+  <!-- Cart Panel -->
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button onclick="closeCart()">X</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <h3>Total: Rs <span id="cartTotal">0.00</span></h3>
+      <a href="#checkout" onclick="closeCart()">Go to Checkout</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <h3>ApeKade Online Store</h3>
+    <p>Useful Products. Easy Orders. Islandwide Delivery.</p>
+    <div>
+      <a href="#about">About Us</a>
+      <a href="#return">Return Policy</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.facebook.com/onlineapekade" target="_blank">Facebook</a>
+      <a href="https://wa.me/94710921311" target="_blank">WhatsApp</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
