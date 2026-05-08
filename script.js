@@ -83,12 +83,15 @@ const cartPanel = document.getElementById("cartPanel");
 const cartItems = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
 const productTitle = document.getElementById("productTitle");
+const productDetail = document.getElementById("productDetail");
 
 function formatPrice(price) {
   return "Rs " + Number(price).toLocaleString("en-LK") + ".00";
 }
 
 function displayProducts(productList = products) {
+  if (!productGrid) return;
+
   productGrid.innerHTML = "";
 
   if (productList.length === 0) {
@@ -100,12 +103,21 @@ function displayProducts(productList = products) {
     productGrid.innerHTML += `
       <div class="product-card">
         <span class="product-badge">${product.badge}</span>
-        <img src="${product.image}" alt="${product.name}">
+
+        <a href="product.html?id=${product.id}">
+          <img src="${product.image}" alt="${product.name}">
+        </a>
+
         <div class="product-info">
           <div class="product-category">${product.category}</div>
-          <h3>${product.name}</h3>
+
+          <a href="product.html?id=${product.id}">
+            <h3>${product.name}</h3>
+          </a>
+
           <p>${product.description}</p>
           <h4>${formatPrice(product.price)}</h4>
+
           <div class="product-actions">
             <button onclick="addToCart(${product.id})">Add Cart</button>
             <a href="https://wa.me/${whatsappNumber}?text=${encodeURIComponent("I want to order " + product.name + " - " + formatPrice(product.price))}" target="_blank">WhatsApp</a>
@@ -116,7 +128,58 @@ function displayProducts(productList = products) {
   });
 }
 
+function renderProductDetail() {
+  if (!productDetail) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const productId = Number(params.get("id"));
+  const product = products.find(item => item.id === productId);
+
+  if (!product) {
+    productDetail.innerHTML = `
+      <div>
+        <a class="back-to-shop" href="index.html#products">← Back to Shop</a>
+        <h2>Product not found</h2>
+        <p>Please go back to the shop and select a product.</p>
+      </div>
+    `;
+    return;
+  }
+
+  document.title = product.name + " - ApeKade";
+
+  productDetail.innerHTML = `
+    <div class="product-detail-image">
+      <a class="back-to-shop" href="index.html#products">← Back to Shop</a>
+      <img src="${product.image}" alt="${product.name}">
+    </div>
+
+    <div class="product-detail-info">
+      <div class="detail-category">${product.category}</div>
+      <h1>${product.name}</h1>
+      <div class="detail-price">${formatPrice(product.price)}</div>
+      <span class="detail-badge">${product.badge}</span>
+
+      <p>${product.description}</p>
+
+      <ul class="detail-points">
+        <li>Cash on Delivery available</li>
+        <li>Easy WhatsApp order confirmation</li>
+        <li>Islandwide delivery service</li>
+        <li>Quality checked before order confirmation</li>
+      </ul>
+
+      <div class="detail-actions">
+        <button onclick="addToCart(${product.id})">Add to Cart</button>
+        <a href="https://wa.me/${whatsappNumber}?text=${encodeURIComponent("I want to order " + product.name + " - " + formatPrice(product.price))}" target="_blank">Order on WhatsApp</a>
+      </div>
+    </div>
+  `;
+}
+
 function filterProducts(category) {
+  if (!productTitle) return;
+
   if (category === "all") {
     productTitle.textContent = "Shop All Products";
     displayProducts(products);
@@ -129,7 +192,10 @@ function filterProducts(category) {
 }
 
 function searchProducts() {
-  const searchValue = document.getElementById("searchInput").value.toLowerCase();
+  const searchInput = document.getElementById("searchInput");
+  if (!searchInput) return;
+
+  const searchValue = searchInput.value.toLowerCase();
 
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchValue) ||
@@ -137,12 +203,14 @@ function searchProducts() {
     product.description.toLowerCase().includes(searchValue)
   );
 
-  productTitle.textContent = "Search Results";
+  if (productTitle) productTitle.textContent = "Search Results";
   displayProducts(filteredProducts);
 }
 
 function addToCart(productId) {
   const product = products.find(item => item.id === productId);
+  if (!product) return;
+
   cart.push(product);
   saveCart();
   updateCart();
@@ -160,6 +228,8 @@ function saveCart() {
 }
 
 function updateCart() {
+  if (!cartCount || !cartItems || !cartTotal) return;
+
   cartCount.textContent = cart.length;
   cartItems.innerHTML = "";
 
@@ -190,11 +260,11 @@ function updateCart() {
 }
 
 function openCart() {
-  cartPanel.classList.add("active");
+  if (cartPanel) cartPanel.classList.add("active");
 }
 
 function closeCart() {
-  cartPanel.classList.remove("active");
+  if (cartPanel) cartPanel.classList.remove("active");
 }
 
 function sendOrderToWhatsApp() {
@@ -232,4 +302,5 @@ function sendOrderToWhatsApp() {
 }
 
 displayProducts();
+renderProductDetail();
 updateCart();
