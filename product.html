@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details - ApeKade</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <p>Useful Products. Easy Orders. Islandwide Delivery.</p>
+    <div>
+      <a href="https://www.facebook.com/onlineapekade" target="_blank">Facebook</a>
+      <a href="https://wa.me/94710921311" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="logo-box">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihyphenhyphenvfjtOhZduY2DoBB70YS5QpGPCPxtDj83sBNWVq5yJATvHERIZ-gOg70o9iMkMsroGHch3kYrayVOs0VA0vU8rToQceLOjX0H8Guj49cTe2R_latyOFDoLt6v6llZ_p6h8zlW-ANok7V__ClwhmB4LCAtW3comq4TmdJZA09G3JUtdOYgM15F2hsUiU/s320/536283650_1102068118694080_5990569046468868467_n.jpg" alt="ApeKade Logo">
+      <div>
+        <h1>ApeKade</h1>
+        <span>Online Store</span>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search products..." />
+      <button onclick="window.location.href='index.html#products'">Search</button>
+    </div>
+
+    <button class="cart-btn" onclick="openCart()">
+      Cart <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <a href="index.html">Home</a>
+    <a href="index.html#products">Shop All</a>
+    <a href="index.html#about">About Us</a>
+    <a href="index.html#return">Return Policy</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <!-- Product Details -->
+  <main class="product-detail-page">
+    <div id="productDetail" class="product-detail-box">
+      <!-- Product details load from script.js -->
+    </div>
+  </main>
+
+  <!-- Cart Panel -->
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button onclick="closeCart()">X</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <h3>Total: Rs <span id="cartTotal">0.00</span></h3>
+      <a href="index.html#checkout" onclick="closeCart()">Go to Checkout</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <h3>ApeKade Online Store</h3>
+    <p>Useful Products. Easy Orders. Islandwide Delivery.</p>
+    <div>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#return">Return Policy</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://www.facebook.com/onlineapekade" target="_blank">Facebook</a>
+      <a href="https://wa.me/94710921311" target="_blank">WhatsApp</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
